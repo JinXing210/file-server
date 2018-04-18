@@ -53,7 +53,7 @@ app.get('/photo/:page', function(req, res) {
     if( filename == null ) {
         return;
     }
-    filename = '.client/photos/' + req.params.page;
+    filename = './client/photos/' + req.params.page;
     if( !fs.existsSync(filename) ) { 
         res.send('done');
         return;
