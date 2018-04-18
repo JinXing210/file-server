@@ -18,7 +18,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.use(express.static('client'));
+app.use(express.static('html'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
@@ -29,6 +29,7 @@ var server = app.listen(port, function(){
 //-------------------------------------------------------//
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
+    console.log( "/"+ JSON.stringify(req.params) );
     res.render('index.html');
 });
 //-------------------------------------------------------//
