@@ -12,15 +12,13 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded());
 app.use(session({
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized: true
 }));
-app.use(express.static('client'));
+app.use(express.static(__dirname + '/client'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
