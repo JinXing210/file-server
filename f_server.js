@@ -25,6 +25,18 @@ var server = app.listen(port, function(){
     console.log("Live Video Chat Server has started on port " + port);
 });
 
+validate = function(param) {
+    if (  !param || param === '' ) {
+        return false;
+    }
+    return true;
+}
+
+isEmpty = function(obj) { 
+    for (var x in obj) { return false; }
+    return true;
+}
+
 //-------------------------------------------------------//
 //-------------------------------------------------------//
 //-------------------------------------------------------//
