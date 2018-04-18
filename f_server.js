@@ -79,6 +79,8 @@ app.post('/upload', function(req, res) {
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function(field, file) {
+        console.log( field );
+        console.log( file );
         outfilename = Date.now() + '_' + file.name;
         console.log( outfilename );
         fs.rename(file.path, path.join(form.uploadDir, outfilename));
