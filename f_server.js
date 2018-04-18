@@ -15,6 +15,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(session({
+    secret: '@#@$MYSIGN#@$#$',
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.static('client'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
@@ -48,7 +53,7 @@ app.get('/photo/:page', function(req, res) {
     if( filename == null ) {
         return;
     }
-    filename = './photos/' + req.params.page;
+    filename = '.client/photos/' + req.params.page;
     if( !fs.existsSync(filename) ) { 
         res.send('done');
         return;
