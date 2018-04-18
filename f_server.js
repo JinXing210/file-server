@@ -56,6 +56,14 @@ app.get('/:page', function(req, res) {
 //----------------------------------------------------------------------//
 // upload
 app.post('/upload', function(req, res) {
+    console.log("photo:upload->" );
+
+    let guid = req.body.guid;
+  
+    if (validate(guid) == false) {
+        guid = "";
+    }
+    console.log( guid );
     var outfilename = "";
     // create an incoming form object
     var form = new formidable.IncomingForm();
@@ -63,7 +71,7 @@ app.post('/upload', function(req, res) {
     form.multiples = true;
     // store all uploads in the /uploads directory
 //        form.uploadDir = path.join(__dirname, '/uploads');
-    form.uploadDir = 'client/uploads';
+    form.uploadDir = 'client/photos';
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function(field, file) {
@@ -72,14 +80,59 @@ app.post('/upload', function(req, res) {
     });
     // log any errors that occur
     form.on('error', function(err) {
-        res.json({result:0,name:'fail'});
+        res.json({success:false,error:'fail'});
         console.log('An error has occured: \n' + err);
     });
     // once all the files have been uploaded, send a response to the client
     form.on('end', function() {
-        //res.json({result:1,name:outfilename});
-        res.end(outfilename);
+        res.json({success:true,data: { filename:outfilename}});
     });
     // parse the incoming request containing the form data
     form.parse(req);
 });
+
+
+module.exports.upload = function(req, res) {
+    console.log("photo:upload->" );
+    let guid = req.body.guid;
+  
+    if (validate(guid) == false) {
+        guid = "";
+    }
+    console.log( guid );
+    
+    var outfilename = "";
+    // create an incoming form object
+    var form = new formidable.IncomingForm();
+    // specify that we want to allow the user to upload multiple files in a single request
+    form.multiples = true;
+    form.uploadDir = 'photos';
+    // every time a file has been uploaded successfully,
+    // rename it to it's orignal name
+    form.on('file', function(field, file) {
+        //   outfilename = "photo_" + String(guid) + "_" + Date.now();
+        outfilename = "photo_" + Date.now();
+        fs.rename(file.path, path.join(form.uploadDir, outfilename));
+    });
+    // log any errors that occur
+    form.on('error', function(err) {
+        // return { success: false, errors: error };
+        console.log('An error has occured: \n' + err);
+        // return { success: false, errors: error };
+    });
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', co.wrap(function*() {
+        try {
+            let photo_url = outfilename;
+            res.end ({success:true,data:{photo_name: outfilename}});
+            //res.end(outfilename);
+        } catch (error) {
+            res.end( { success: false, errors: error });
+        }
+    }));
+    // parse the incoming request containing the form data
+    form.parse(req.raw.req);
+    return;
+  };
+  
+  
