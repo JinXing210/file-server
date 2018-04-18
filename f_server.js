@@ -49,7 +49,7 @@ upload = function(req,res,dir) {
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function(field, file) {
-        outfilename = guid_Date.now() + '_' + file.name;
+        outfilename = guid + "_" + Date.now() + '_' + file.name;
         fs.rename(file.path, path.join(form.uploadDir, outfilename));
     });
     // log any errors that occur
