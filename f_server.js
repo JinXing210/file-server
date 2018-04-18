@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 });
 //-------------------------------------------------------//
 app.get('/:page', function(req, res) {
-    console.log( "/"+req.params );
+    console.log( "/"+ JSON.stringify(req.params) );
     var filename = req.params.page;
     if( filename == null ) {
         return;
