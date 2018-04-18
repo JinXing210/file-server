@@ -7,18 +7,10 @@ var fs = require("fs");
 var path = require('path');
 var formidable = require('formidable');
 //-------------------------------------------------------//
-app.set('views', __dirname + '/html');
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(session({
-    secret: '@#@$MYSIGN#@$#$',
-    resave: false,
-    saveUninitialized: true
-}));
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/html'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
@@ -59,7 +51,6 @@ app.get('/photo/:page', function(req, res) {
     console.log( filename );
     try {
         res.sendfile(filename);
-        // res.render(filename);
     } catch (e) {
         console.log('         error loading page-' + req.params.page );
         res.send('done');
