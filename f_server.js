@@ -58,7 +58,8 @@ app.get('/photo/:page', function(req, res) {
     } 
     console.log( filename );
     try {
-        res.render(filename);
+        res.sendfile(filename);
+        // res.render(filename);
     } catch (e) {
         console.log('         error loading page-' + req.params.page );
         res.send('done');
