@@ -35,7 +35,7 @@ isEmpty = function(obj) {
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
     console.log( "/"+ JSON.stringify(req.params) );
-    res.render('index.html');
+    res.render('./html/index.html');
 });
 //-------------------------------------------------------//
 app.get('/photo/:page', function(req, res) {
@@ -51,7 +51,7 @@ app.get('/photo/:page', function(req, res) {
     } 
     console.log( filename );
     try {
-        res.render("./html/"+filename);
+        res.render(filename);
     } catch (e) {
         console.log('         error loading page-' + req.params.page );
         res.send('done');
