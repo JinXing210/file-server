@@ -93,8 +93,8 @@ app.post('/upload', function(req, res) {
     });
     // log any errors that occur
     form.on('error', function(err) {
-        res.json({success:false,error:'fail'});
         console.log('An error has occured: \n' + err);
+        res.json({success:false,error:'fail'});
     });
     // once all the files have been uploaded, send a response to the client
     form.on('end', function() {
