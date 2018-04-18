@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(express.static(''));
+app.use(express.static('client'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
@@ -39,7 +39,7 @@ isEmpty = function(obj) {
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
     console.log( "/"+ JSON.stringify(req.params) );
-    res.render('html/index.html');
+    res.render('index.html');
 });
 //-------------------------------------------------------//
 app.get('/photo/:page', function(req, res) {
@@ -48,11 +48,11 @@ app.get('/photo/:page', function(req, res) {
     if( filename == null ) {
         return;
     }
-    filename = './client/photos/' + req.params.page;
-    if( !fs.existsSync(filename) ) { 
-        res.send('done');
-        return;
-    } 
+    filename = './photos/' + req.params.page;
+    // if( !fs.existsSync(filename) ) { 
+    //     res.send('done');
+    //     return;
+    // } 
     console.log( filename );
     try {
         res.render(filename);
