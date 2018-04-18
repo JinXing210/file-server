@@ -8,16 +8,19 @@ var path = require('path');
 var formidable = require('formidable');
 //-------------------------------------------------------//
 // Setting environment
-app.set('views', __dirname + '/html');
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
+// app.set('views', __dirname + '/html');
+// app.set('view engine', 'ejs');
+// app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(session({
-    secret: '@#@$MYSIGN#@$#$',
-    resave: false,
-    saveUninitialized: true
+app.use(bodyParser.urlencoded({
+    extended: true
 }));
+// app.use(session({
+//     secret: '@#@$MYSIGN#@$#$',
+//     resave: false,
+//     saveUninitialized: true
+// }));
+
 app.use(express.static('html'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
@@ -68,7 +71,7 @@ app.get('/:page', function(req, res) {
 //----------------------------------------------------------------------//
 // upload
 app.post('/upload', function(req, res) {
-    console.log("photo:upload->" + JSON.stringify(req.body));
+    console.log("photo:upload->" + req.body);
 
     var guid = req.body.guid;
   
