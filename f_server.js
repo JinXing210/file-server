@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(express.static('html'));
+app.use(express.static(''));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
@@ -39,7 +39,7 @@ isEmpty = function(obj) {
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
     console.log( "/"+ JSON.stringify(req.params) );
-    res.render('index.html');
+    res.render('html/index.html');
 });
 //-------------------------------------------------------//
 app.get('/photo/:page', function(req, res) {
