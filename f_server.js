@@ -37,13 +37,13 @@ app.get('/', function(req, res) {
     res.render('index.html');
 });
 //-------------------------------------------------------//
-app.get('/:page', function(req, res) {
+app.get('/photo/:page', function(req, res) {
     console.log( JSON.stringify(req.params) );
     var filename = req.params.page;
     if( filename == null ) {
         return;
     }
-    filename = '' + req.params.page;
+    filename = './client/photos/' + req.params.page;
     if( !fs.existsSync(filename) ) { 
         res.send('done');
         return;
