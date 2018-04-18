@@ -35,7 +35,7 @@ isEmpty = function(obj) {
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
     console.log( "/"+ JSON.stringify(req.params) );
-    res.render('../html/index.html');
+    res.render('../../html/index.html');
 });
 //-------------------------------------------------------//
 app.get('/photo/:page', function(req, res) {
