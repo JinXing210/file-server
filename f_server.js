@@ -68,7 +68,7 @@ app.get('/:page', function(req, res) {
 //----------------------------------------------------------------------//
 // upload
 app.post('/upload', function(req, res) {
-    console.log("photo:upload->" + req.body);
+    console.log("photo:upload->" + JSON.stringify(req));
 
     var guid = req.body.guid;
   
