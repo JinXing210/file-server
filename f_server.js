@@ -7,11 +7,15 @@ var fs = require("fs");
 var path = require('path');
 var formidable = require('formidable');
 //-------------------------------------------------------//
+app.set('views', __dirname + '/html');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(express.static('client/photos'));
+app.use(express.static('client'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
@@ -35,7 +39,7 @@ isEmpty = function(obj) {
 //-------------------------------------------------------//
 app.get('/', function(req, res) {
     console.log( "/"+ JSON.stringify(req.params) );
-    res.render('../../html/index.html');
+    res.render('index.html');
 });
 //-------------------------------------------------------//
 app.get('/photo/:page', function(req, res) {
