@@ -48,11 +48,11 @@ app.get('/photo/:page', function(req, res) {
     if( filename == null ) {
         return;
     }
-    filename = 'photos/' + req.params.page;
-    // if( !fs.existsSync(filename) ) { 
-    //     res.send('done');
-    //     return;
-    // } 
+    filename = './photos/' + req.params.page;
+    if( !fs.existsSync(filename) ) { 
+        res.send('done');
+        return;
+    } 
     console.log( filename );
     try {
         res.render(filename);
