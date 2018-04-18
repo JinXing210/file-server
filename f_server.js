@@ -60,7 +60,7 @@ app.get('/:page', function(req, res) {
 //----------------------------------------------------------------------//
 // upload
 app.post('/upload', function(req, res) {
-    console.log(req.body);
+    console.log(req);
 
     var guid = req.body.guid;
   
