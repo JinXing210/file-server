@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(express.static('client'));
+app.use(express.static('html'));
 //-------------------------------------------------------//
 var port = process.env.PORT || 4500;
 var server = app.listen(port, function(){
