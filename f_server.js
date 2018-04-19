@@ -45,7 +45,7 @@ upload = function(req,res,dir) {
     form.multiples = true;
     // store all uploads in the /uploads directory
 //        form.uploadDir = path.join(__dirname, '/uploads');
-    form.uploadDir = "client/"+dir;
+    form.uploadDir = "./client/image";//+dir;
     // every time a file has been uploaded successfully,
     // rename it to it's orignal name
     form.on('file', function(field, file) {
@@ -122,6 +122,5 @@ app.post('/upload_avatar', function(req, res) {
 });
 
 app.post('/upload_image', function(req, res) {
-    console.log(req.query);
     upload(req,res,"image")
 });
