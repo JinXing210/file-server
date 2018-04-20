@@ -121,6 +121,74 @@ app.get('/image/:page', function(req, res) {
     })
 });
 
+app.get('/audio/:page', function(req, res) {
+    console.log( JSON.stringify(req.params) );
+    var filename = req.params.page;
+    if( filename == null ) {
+        return;
+    }
+    setImmediate(function() {
+        var filename = './client/audio/' + req.params.page;
+        if( !fs.existsSync(filename) ) { 
+            res.send('done');
+            return;
+        } 
+        console.log( filename );
+        try {
+            res.sendfile(filename);
+        } catch (e) {
+            console.log('         error loading page-' + req.params.page );
+            res.send('done');
+        }
+    
+    })
+});
+
+app.get('/video/:page', function(req, res) {
+    console.log( JSON.stringify(req.params) );
+    var filename = req.params.page;
+    if( filename == null ) {
+        return;
+    }
+    setImmediate(function() {
+        var filename = './client/video/' + req.params.page;
+        if( !fs.existsSync(filename) ) { 
+            res.send('done');
+            return;
+        } 
+        console.log( filename );
+        try {
+            res.sendfile(filename);
+        } catch (e) {
+            console.log('         error loading page-' + req.params.page );
+            res.send('done');
+        }
+    
+    })
+});
+app.get('/file/:page', function(req, res) {
+    console.log( JSON.stringify(req.params) );
+    var filename = req.params.page;
+    if( filename == null ) {
+        return;
+    }
+    setImmediate(function() {
+        var filename = './client/file/' + req.params.page;
+        if( !fs.existsSync(filename) ) { 
+            res.send('done');
+            return;
+        } 
+        console.log( filename );
+        try {
+            res.sendfile(filename);
+        } catch (e) {
+            console.log('         error loading page-' + req.params.page );
+            res.send('done');
+        }
+    
+    })
+});
+
 //----------------------------------------------------------------------//
 // upload
 app.post('/upload_avatar', function(req, res) {
@@ -131,4 +199,14 @@ app.post('/upload_avatar', function(req, res) {
 
 app.post('/upload_image', function(req, res) {
     upload(req,res,"image")
+});
+
+app.post('/upload_audio', function(req, res) {
+    upload(req,res,"audio")
+});
+app.post('/upload_video', function(req, res) {
+    upload(req,res,"video")
+});
+app.post('/upload_file', function(req, res) {
+    upload(req,res,"file")
 });
