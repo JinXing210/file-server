@@ -88,7 +88,7 @@ app.get('/avatar/:page', function(req, res) {
     } 
     console.log( filename );
     try {
-        res.sendfile(filename);
+        res.sendFile(filename);
     } catch (e) {
         console.log('         error loading page-' + req.params.page );
         res.send('done');
@@ -109,7 +109,7 @@ app.get('/image/:page', function(req, res) {
         } 
         console.log( filename );
         try {
-            res.sendfile(filename);
+            res.sendFile(filename);
         } catch (e) {
             console.log('         error loading page-' + req.params.page );
             res.send('done');
