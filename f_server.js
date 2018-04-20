@@ -30,7 +30,7 @@ isEmpty = function(obj) {
     return true;
 }
 
-upload = function(req,res,dir,callback) {
+upload = function(req,res,dir) {
     console.log(req.query);
 
     var guid = req.query.guid;
@@ -57,16 +57,16 @@ upload = function(req,res,dir,callback) {
     form.on('error', function(err) {
         console.log('An error has occured: \n' + err);
         res.json({success:false,error:'fail'});
-        callback(err);
     });
     // once all the files have been uploaded, send a response to the client
     form.on('end', function() {
         console.log(outfilename);
         res.json({success:true,data: { filename:outfilename}});
-        callback(null);
     });
     // parse the incoming request containing the form data
-    form.parse(req);
+    form.parse(req,function(err,fields,files){
+
+    });
 };
 
 //-------------------------------------------------------//
@@ -125,13 +125,10 @@ app.get('/image/:page', function(req, res) {
 // upload
 app.post('/upload_avatar', function(req, res) {
     console.log(req.query);
-    upload(req,res,"avatar",function(error){
-        
-    })
+    upload(req,res,"avatar")
+
 });
 
 app.post('/upload_image', function(req, res) {
-    upload(req,res,"image",function(error) {
-
-    })
+    upload(req,res,"image")
 });
