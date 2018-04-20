@@ -7,6 +7,7 @@ var fs = require("fs");
 var path = require('path');
 var formidable = require('formidable');
 //-------------------------------------------------------//
+app.set('view cache',true)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -100,18 +101,21 @@ app.get('/image/:page', function(req, res) {
     if( filename == null ) {
         return;
     }
-    filename = './client/image/' + req.params.page;
-    if( !fs.existsSync(filename) ) { 
-        res.send('done');
-        return;
-    } 
-    console.log( filename );
-    try {
-        res.sendfile(filename);
-    } catch (e) {
-        console.log('         error loading page-' + req.params.page );
-        res.send('done');
-    }
+    setImmediate(function() {
+        var filename = './client/image/' + req.params.page;
+        if( !fs.existsSync(filename) ) { 
+            res.send('done');
+            return;
+        } 
+        console.log( filename );
+        try {
+            res.sendfile(filename);
+        } catch (e) {
+            console.log('         error loading page-' + req.params.page );
+            res.send('done');
+        }
+    
+    })
 });
 
 //----------------------------------------------------------------------//
