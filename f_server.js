@@ -91,7 +91,7 @@ app.get('/avatar/:page', function(req, res) {
     } 
     console.log( filename );
     try {
-        res.sendfile(filename);
+        res.sendFile(filename);
     } catch (e) {
         console.log('         error loading page-' + req.params.page );
         res.send('done');
@@ -112,7 +112,7 @@ app.get('/image/:page', function(req, res) {
         } 
         console.log( filename );
         try {
-            res.sendfile(filename);
+            res.sendFile(filename);
         } catch (e) {
             console.log('         error loading page-' + req.params.page );
             res.send('done');
@@ -135,7 +135,7 @@ app.get('/audio/:page', function(req, res) {
         } 
         console.log( filename );
         try {
-            res.sendfile(filename);
+            res.sendFile(filename);
         } catch (e) {
             console.log('         error loading page-' + req.params.page );
             res.send('done');
@@ -158,7 +158,7 @@ app.get('/video/:page', function(req, res) {
         } 
         console.log( filename );
         try {
-            res.sendfile(filename);
+            res.sendFile(filename);
         } catch (e) {
             console.log('         error loading page-' + req.params.page );
             res.send('done');
@@ -166,6 +166,7 @@ app.get('/video/:page', function(req, res) {
     
     })
 });
+
 app.get('/file/:page', function(req, res) {
     console.log( JSON.stringify(req.params) );
     var filename = req.params.page;
@@ -180,7 +181,7 @@ app.get('/file/:page', function(req, res) {
         } 
         console.log( filename );
         try {
-            res.sendfile(filename);
+            res.sendFile(filename);
         } catch (e) {
             console.log('         error loading page-' + req.params.page );
             res.send('done');
